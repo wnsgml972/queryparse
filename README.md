@@ -1,4 +1,4 @@
-# Data Query
+# queryparse
 
 ## Highlights
 * Single header file
@@ -15,6 +15,9 @@ Todo:
 
 ## Contributing
 Contributions are welcome, have a look at the [CONTRIBUTING.md](CONTRIBUTING.md) document for more information.
+
+## Third Party Notice
+This project uses third-party softwares from the project listed below, have a look at the [ThirdPartyNotice.md](ThirdPartyNotice.md) document for more information.
 
 ## License
 The project is available under the [MIT](https://opensource.org/licenses/MIT) license.
