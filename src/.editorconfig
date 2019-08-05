@@ -1,0 +1,26 @@
+﻿# 소스 코드 일관성 편집툴
+# https://docs.microsoft.com/ko-kr/visualstudio/ide/create-portable-custom-editor-options
+#
+
+# 루트 설정 파일
+root = true
+
+# 모든 파일이 대해
+#   줄바꿈 문자 기본값을 \r\n 으로
+#   텍스트 인코딩을 utf-8로
+[*]
+end_of_line: crlf
+
+# 웹 관련 기능들은 utf-8이 기본
+[*.{json,md,js,html,htm}]
+charset = utf-8
+
+# C/C++ 소스 및 헤더파일에 대해
+# 1.  Intent Style은 Space 한 Indent당 Space 4개 : 즉 Tap 누르면 Space 4개로
+# 2.  빈 공백문자를 없애기
+# 3.  소스 마지막줄에 빈줄 추가하기
+[*.{cpp,c,h,hpp}]
+indent_style = space
+indent_size = 4
+# 2. #trim_trailing_whitespace = true
+# 3. #insert_final_newline = true
