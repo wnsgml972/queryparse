@@ -4,8 +4,7 @@
 // main app start
 int main()
 {
-    QueryAPI::runQueryAPI();
-
+    QueryAPI::GetInstance()->runQueryAPI();
 
 	return 0;
 }
