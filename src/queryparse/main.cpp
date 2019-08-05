@@ -6,5 +6,7 @@ int main()
 {
     QueryAPI::GetInstance()->runQueryAPI();
 
+    system("pause");
+
 	return 0;
 }
