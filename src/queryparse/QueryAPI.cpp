@@ -4,6 +4,14 @@
 #include "argparse.hpp"
 #include <stdarg.h>
 
+void QueryAPI::runQueryAPI()
+{
+    std::thread myThread([&]()
+    {
+        QueryAPI::mainTestCode();
+    });
+}
+
 void QueryAPI::mainTestCode()
 {
 	QueryAPI::startQueryAPI();
@@ -12,22 +20,50 @@ void QueryAPI::mainTestCode()
 
 	argparse::ArgumentParser program("queryparse");
 
-	program.add_argument("square")
-		.help("display the square of a given integer")
-		.action([](const std::string& value) { return std::stoi(value); });
+	// add args
+	{
+		program.add_argument("square")
+			.help("display the square of a given integer")
+			.action([](const std::string& value) { return std::stoi(value); });
 
-	try {
-		program.parse_args(argc, argv);
-	}
-	catch (const std::runtime_error& err) {
-		std::cout << err.what() << std::endl;
-		program.print_help();
-		assert(0);
-		exit(0);
+		program.add_argument("--verbose")
+			.default_value(false)
+			.implicit_value(true);
+
+		program.add_argument("integer")
+			.help("Input number")
+			.action([](const std::string& value) { return std::stoi(value); });
+
+		program.add_argument("floats")
+			.help("Vector of floats")
+			.nargs(4)
+			.action([](const std::string& value) { return std::stof(value); });
 	}
 
+	// parse
+	{
+		try {
+			program.parse_args(argc, argv);
+		}
+		catch (const std::runtime_error& err) {
+			std::cout << err.what() << std::endl;
+			program.print_help();
+			assert(0);
+			exit(0);
+		}
+	}
+
+
+	// result
 	auto input = program.get<int>("square");
-	std::cout << (input * input) << std::endl;
+	if (program["--verbose"] == true)
+	{
+		std::cout << "The square of " << input << " is " << (input * input) << std::endl;
+	}
+	else
+	{
+		std::cout << (input * input) << std::endl;
+	}
 
 	QueryAPI::endQueryAPI(argc, argv);
 }
@@ -65,7 +101,6 @@ void QueryAPI::startQueryAPI()
 
 void QueryAPI::endQueryAPI(int argc, char **argv)
 {
-	/* 메모리 해제 */
 	free(argv);
 
 	system("pause");

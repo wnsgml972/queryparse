@@ -1,41 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="app">
+    <Filter Include="Global Setting Files">
+      <UniqueIdentifier>{8253aa9d-6ac0-49cb-b349-49be48ed0d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{ac3a2120-e484-4b85-8943-f6ed637628a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="common">
-      <UniqueIdentifier>{ac3a2120-e484-4b85-8943-f6ed637628a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="app\main">
+    <Filter Include="App\main">
       <UniqueIdentifier>{bff8b3d7-d4c9-4da2-ac6c-9f8eadeff062}</UniqueIdentifier>
     </Filter>
-    <Filter Include="app\queryAPI">
+    <Filter Include="App\QueryAPI">
       <UniqueIdentifier>{4f822d62-19b1-4cd0-9d1c-125aa81993e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QueryAPI.cpp">
-      <Filter>app\queryAPI</Filter>
+      <Filter>App\QueryAPI</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>app\main</Filter>
+      <Filter>App\main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\argparse.hpp">
-      <Filter>include</Filter>
+      <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
-      <Filter>common</Filter>
+      <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="QueryAPI.h">
-      <Filter>app\queryAPI</Filter>
+      <Filter>App\QueryAPI</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig">
+      <Filter>Global Setting Files</Filter>
+    </None>
+    <None Include="..\queryparse.props">
+      <Filter>Global Setting Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

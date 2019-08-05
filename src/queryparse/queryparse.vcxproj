@@ -125,6 +125,10 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="QueryAPI.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\queryparse.props" />
+    <None Include=".editorconfig" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

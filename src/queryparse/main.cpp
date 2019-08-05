@@ -4,7 +4,8 @@
 // main app start
 int main()
 {
-	QueryAPI::mainTestCode();
+    QueryAPI::runQueryAPI();
+
 
 	return 0;
 }
