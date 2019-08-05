@@ -1,11 +1,10 @@
-#include <iostream>
-#include "argparse.hpp"
+#include "define.h"
+#include "QueryAPI.h"
 
+// main app start
 int main()
 {
-	std::cout << "helow world!" << std::endl;
+	QueryAPI::mainTestCode();
 
-	while (1) {
-
-	}
+	return 0;
 }
