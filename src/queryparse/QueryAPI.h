@@ -21,21 +21,29 @@ private:
     // main
     void queryAPI();
 
-    // make arg parser
-    argparse::ArgumentParser makeArgumentParser();
-
     // make argc, argv
-    std::tuple<int, char**> input();
-	char** newArgv(int count, ...);
+    std::tuple<int, char**> inputString();
+    char** makeArgv(int count, ...);
+
+    // make arg parser
+    std::shared_ptr<argparse::ArgumentParser> makeArgumentParser(const int& argc, char **dpArgv);
+    void addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
+    void addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
 
     // start end callback
     void startQueryAPI();
-	void endQueryAPI(int argc, char **argv);
-    void printOutput();
+	void endQueryAPI(std::shared_ptr<argparse::ArgumentParser> program, const int& argc, char **dpArgv);
+    void printOutput(std::shared_ptr<argparse::ArgumentParser> program);
+
+    // printer
+    void printer(std::wstring str);
+    void printer(const char* str);
 
 private:
     std::thread m_runnerThread;
 
+    std::wstring m_inputString;
+    std::vector<std::wstring> m_spiltedInputString;
 
     //////////////////////////////////////////////////////////////////////////
     static std::unique_ptr<QueryAPI> m_instance;
