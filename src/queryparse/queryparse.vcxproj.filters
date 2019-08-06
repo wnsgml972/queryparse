@@ -21,6 +21,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="App\Printer">
+      <UniqueIdentifier>{1c17d472-812d-4f43-abc3-e42ecaf34e9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QueryAPI.cpp">
@@ -28,6 +31,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>App\main</Filter>
+    </ClCompile>
+    <ClCompile Include="Printer.cpp">
+      <Filter>App\Printer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +45,9 @@
     </ClInclude>
     <ClInclude Include="QueryAPI.h">
       <Filter>App\QueryAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Printer.h">
+      <Filter>App\Printer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

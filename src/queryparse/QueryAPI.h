@@ -1,4 +1,5 @@
 #pragma once
+
 #include "define.h"
 
 namespace argparse
@@ -6,50 +7,55 @@ namespace argparse
     class ArgumentParser;
 }
 
-// thread safe singleton
-class QueryAPI
+namespace queryparse
 {
-public:
-    // instance
-    static QueryAPI* GetInstance();
+    class Printer;
 
-    // run API
-    void runQueryAPI();
+    // thread safe singleton
+    class QueryAPI
+    {
+    public:
+        // instance
+        static QueryAPI* GetInstance();
 
+        // run API
+        void runQueryAPI();
 
-private:
-    // main
-    void queryAPI();
+    protected:
+        virtual void OnInitialize() { /* Implement in subclass */ }
 
-    // make argc, argv
-    std::tuple<int, char**> inputString();
-    char** makeArgv(int count, ...);
+    private:
+        // main
+        void queryAPI();
+        void Initialize();
 
-    // make arg parser
-    std::shared_ptr<argparse::ArgumentParser> makeArgumentParser(const int& argc, char **dpArgv);
-    void addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
-    void addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
+        // make argc, argv
+        std::tuple<int, char**> inputString();
+        char** makeArgv(int count, ...);
 
-    // start end callback
-    void startQueryAPI();
-	void endQueryAPI(std::shared_ptr<argparse::ArgumentParser> program, const int& argc, char **dpArgv);
-    void printOutput(std::shared_ptr<argparse::ArgumentParser> program);
+        // make arg parser
+        std::shared_ptr<argparse::ArgumentParser> makeArgumentParser(const int& argc, char **dpArgv);
+        void addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
+        void addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
 
-    // printer
-    void printer(std::wstring str);
-    void printer(const char* str);
+        // start end callback
+        void startQueryAPI();
+        void endQueryAPI(std::shared_ptr<argparse::ArgumentParser> program, const int& argc, char **dpArgv);
+        void printOutput(std::shared_ptr<argparse::ArgumentParser> program);
 
-private:
-    std::thread m_runnerThread;
+    private:
+        std::thread m_runnerThread;
+        std::shared_ptr<Printer> m_printer;
 
-    std::wstring m_inputString;
-    std::vector<std::wstring> m_spiltedInputString;
+        std::wstring m_inputString;
+        std::vector<std::wstring> m_spiltedInputString;
 
-    //////////////////////////////////////////////////////////////////////////
-    static std::unique_ptr<QueryAPI> m_instance;
-    static std::once_flag m_onceFlag;
+        //////////////////////////////////////////////////////////////////////////
+        static std::unique_ptr<QueryAPI> m_instance;
+        static std::once_flag m_onceFlag;
 
-    QueryAPI() = default;
-    QueryAPI(const QueryAPI &) = delete;
-    QueryAPI &operator=(const QueryAPI &) = delete;
-};
+        QueryAPI() = default;
+        QueryAPI(const QueryAPI &) = delete;
+        QueryAPI &operator=(const QueryAPI &) = delete;
+    };
+}

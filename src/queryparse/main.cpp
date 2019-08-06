@@ -4,7 +4,7 @@
 // main app start
 int main()
 {
-    QueryAPI::GetInstance()->runQueryAPI();
+    queryparse::QueryAPI::GetInstance()->runQueryAPI();
 
     system("pause");
 

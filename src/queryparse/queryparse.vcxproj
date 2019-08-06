@@ -118,11 +118,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Printer.cpp" />
     <ClCompile Include="QueryAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\argparse.hpp" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="Printer.h" />
     <ClInclude Include="QueryAPI.h" />
   </ItemGroup>
   <ItemGroup>
