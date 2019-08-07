@@ -117,14 +117,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseInputter.cpp" />
+    <ClCompile Include="BasePrinter.cpp" />
+    <ClCompile Include="ConsoleInputter.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Printer.cpp" />
+    <ClCompile Include="ConsolePrinter.cpp" />
     <ClCompile Include="QueryAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\argparse.hpp" />
+    <ClInclude Include="BaseInputter.h" />
+    <ClInclude Include="BasePrinter.h" />
+    <ClInclude Include="ConsoleInputter.h" />
     <ClInclude Include="define.h" />
-    <ClInclude Include="Printer.h" />
+    <ClInclude Include="ConsolePrinter.h" />
     <ClInclude Include="QueryAPI.h" />
   </ItemGroup>
   <ItemGroup>

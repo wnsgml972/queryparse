@@ -4,23 +4,21 @@
 
 namespace queryparse
 {
-    class Printer
+    // Based WString
+    class BasePrinter
     {
     public:
-        enum class PrinterType {
-            STD_CONSOLE
-        };
+        virtual void messageOut(const std::wstring& str) = 0;
 
     public:
-        Printer();
-        virtual ~Printer() = default;
+        BasePrinter() = default;
+        virtual ~BasePrinter() = default;
 
         void print(const std::wstring& str);
         void print(const char* str);
 
-    private:
+    protected:
         std::wstring charPtr2WString(const char* str);
 
-        PrinterType m_printerType;
     };
 }

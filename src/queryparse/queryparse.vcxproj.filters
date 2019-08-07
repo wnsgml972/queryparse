@@ -24,6 +24,9 @@
     <Filter Include="App\Printer">
       <UniqueIdentifier>{1c17d472-812d-4f43-abc3-e42ecaf34e9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="App\Inputter">
+      <UniqueIdentifier>{a6846c79-bac7-44c6-9b94-f5281444daa6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QueryAPI.cpp">
@@ -32,8 +35,17 @@
     <ClCompile Include="main.cpp">
       <Filter>App\main</Filter>
     </ClCompile>
-    <ClCompile Include="Printer.cpp">
+    <ClCompile Include="BasePrinter.cpp">
       <Filter>App\Printer</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsolePrinter.cpp">
+      <Filter>App\Printer</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseInputter.cpp">
+      <Filter>App\Inputter</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleInputter.cpp">
+      <Filter>App\Inputter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,8 +58,17 @@
     <ClInclude Include="QueryAPI.h">
       <Filter>App\QueryAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Printer.h">
+    <ClInclude Include="BasePrinter.h">
       <Filter>App\Printer</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsolePrinter.h">
+      <Filter>App\Printer</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseInputter.h">
+      <Filter>App\Inputter</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleInputter.h">
+      <Filter>App\Inputter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

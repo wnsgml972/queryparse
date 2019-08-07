@@ -9,7 +9,8 @@ namespace argparse
 
 namespace queryparse
 {
-    class Printer;
+    class ConsoleInputter;
+    class ConsolePrinter;
 
     // thread safe singleton
     class QueryAPI
@@ -29,9 +30,7 @@ namespace queryparse
         void queryAPI();
         void Initialize();
 
-        // make argc, argv
-        std::tuple<int, char**> inputString();
-        char** makeArgv(int count, ...);
+        // Inputter (make argc, argv)
 
         // make arg parser
         std::shared_ptr<argparse::ArgumentParser> makeArgumentParser(const int& argc, char **dpArgv);
@@ -45,10 +44,8 @@ namespace queryparse
 
     private:
         std::thread m_runnerThread;
-        std::shared_ptr<Printer> m_printer;
-
-        std::wstring m_inputString;
-        std::vector<std::wstring> m_spiltedInputString;
+        std::shared_ptr<ConsoleInputter> m_inputter;
+        std::shared_ptr<ConsolePrinter> m_printer;
 
         //////////////////////////////////////////////////////////////////////////
         static std::unique_ptr<QueryAPI> m_instance;

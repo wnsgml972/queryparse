@@ -1,8 +1,8 @@
 
 #include "QueryAPI.h"
 #include "argparse.hpp"
-#include "Printer.h"
-#include <stdarg.h>
+#include "ConsolePrinter.h"
+#include "ConsoleInputter.h"
 
 // static initialize
 std::unique_ptr<queryparse::QueryAPI> queryparse::QueryAPI::m_instance = {};
@@ -42,7 +42,8 @@ void queryparse::QueryAPI::queryAPI()
 	startQueryAPI();
 
     // parse
-    const auto&[argc, dpArgv] = inputString();
+    const auto&[argc, dpArgv] = m_inputter->makeArgcArgv(L"queryparse");
+
     auto program = makeArgumentParser(argc, dpArgv);
     try 
     {
@@ -66,49 +67,13 @@ void queryparse::QueryAPI::queryAPI()
 	endQueryAPI(program, argc, dpArgv);
 }
 
-
 void queryparse::QueryAPI::Initialize()
 {
     OnInitialize();
 
-    m_printer = std::make_shared<queryparse::Printer>();
+    m_inputter = std::make_shared<queryparse::ConsoleInputter>();
+    m_printer = std::make_shared<queryparse::ConsolePrinter>();
 }
-
-std::tuple<int, char**> queryparse::QueryAPI::inputString()
-{
-    std::wstring programName(L"queryparse");
-    
-    std::wstring text;
-    std::wcin >> text;
-
-    int argc = 5;
-    auto dpArgv = makeArgv(argc, programName.c_str(), "--help", "-3", "-3", "-3");
-
-    return { argc, dpArgv };
-}
-
-char** queryparse::QueryAPI::makeArgv(int count, ...)
-{
-    va_list args;
-    int i;
-    char **dpArgv = (char **)malloc((count + 1) * sizeof(char*));
-    char *pTemp;
-
-    {
-        va_start(args, count);
-        for (i = 0; i < count; i++) {
-            pTemp = va_arg(args, char*);
-            dpArgv[i] = (char*)malloc(sizeof(pTemp) + 1);
-            strcpy_s(dpArgv[i], strlen(pTemp) + 1, pTemp);
-        }
-        dpArgv[i] = NULL;
-        va_end(args);
-    }
-
-
-    return dpArgv;
-}
-
 
 std::shared_ptr<argparse::ArgumentParser> queryparse::QueryAPI::makeArgumentParser(const int& argc, char **dpArgv)
 {
