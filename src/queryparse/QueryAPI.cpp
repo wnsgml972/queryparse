@@ -59,10 +59,9 @@ void queryparse::QueryAPI::queryAPI()
         {
             m_printer->print(err.what());
             program->print_help();
-            assert(0);
             return;
         }
-    }	
+    }
 
 	endQueryAPI(program, argc, dpArgv);
 }

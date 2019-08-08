@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "define.h"
 
 namespace queryparse
 {
@@ -16,9 +16,5 @@ namespace queryparse
 
         void print(const std::wstring& str);
         void print(const char* str);
-
-    protected:
-        std::wstring charPtr2WString(const char* str);
-
     };
 }

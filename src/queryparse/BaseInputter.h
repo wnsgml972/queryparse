@@ -18,7 +18,7 @@ namespace queryparse
 
 
     protected:
-        std::tuple<int, std::vector<std::wstring>> getArgcSpiltedInputStrings(const std::wstring& str);
+        std::tuple<int, std::vector<std::wstring>> getArgcSpiltedInputStrings(const std::wstring& str, const std::wstring& programName);
         char** makeArgv(int count, const std::vector<std::wstring>& spiltedInputStrings);
         char** makeArgv(int count, ...);
 

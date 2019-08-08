@@ -70,6 +70,9 @@
     <ClInclude Include="ConsoleInputter.h">
       <Filter>App\Inputter</Filter>
     </ClInclude>
+    <ClInclude Include="StringConverter.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig">

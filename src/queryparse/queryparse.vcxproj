@@ -132,6 +132,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="ConsolePrinter.h" />
     <ClInclude Include="QueryAPI.h" />
+    <ClInclude Include="StringConverter.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\queryparse.props" />
