@@ -34,7 +34,7 @@ namespace queryparse
         // make arg parser
         std::shared_ptr<argparse::ArgumentParser> makeArgumentParser(const int& argc, char **dpArgv);
         void addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
-        void addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
+        void addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program);
 
         // start end queryAPI callback
         void startQueryAPI();

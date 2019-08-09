@@ -79,40 +79,26 @@ std::shared_ptr<argparse::ArgumentParser> queryparse::QueryAPI::makeArgumentPars
     std::shared_ptr<argparse::ArgumentParser> program = std::make_shared<argparse::ArgumentParser>("queryparse");
 
     addPositionalArguments(program, argc);
-    addOptionalArguments(program, argc);
+    addOptionalArguments(program);
 
     return program;
 }
 
-void queryparse::QueryAPI::addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& dpArgv)
+void queryparse::QueryAPI::addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc)
 {
     program->add_argument("input_query")
         .help("[Data] [Tabel]")
-        .nargs(2)
-        .action([](const std::string& value)
-            {
-                return StringConverter::string2wstring(value);
-            });
-
-    program->add_argument("input_query")
-        .help("[Data] [Tabel] [?]")
-        .nargs(3)
-        .action([](const std::string& value)
-            {
-                return StringConverter::string2wstring(value);
-            });
-
-    program->add_argument("input_query")
-        .help("[Data] [Tabel]  [?]  [?]")
-        .nargs(3)
+        .nargs(argc - 2)
         .action([](const std::string& value)
             {
                 return StringConverter::string2wstring(value);
             });
 }
 
-void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc)
+void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program)
 {
+
+    //  INSERT INTO 테이블명 (열1, 열2) VALUES (값1, 값2);
     {
         program->add_argument("-c", "--create")
             .help("Create Data")
@@ -120,14 +106,15 @@ void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::Argume
             .implicit_value(true);
     }
 
+    // SELECT 열이름 FROM 테이블명;
     {
         program->add_argument("-r", "--read")
             .help("Read Data")
             .default_value(false)
-            .implicit_value(true)
-            .nargs(argc);
+            .implicit_value(true);
     }
 
+//  DELETE FROM 테이블명 WHERE 조건;
     {
         program->add_argument("-u", "--update")
             .help("Update Data")
@@ -135,6 +122,7 @@ void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::Argume
             .implicit_value(true);
     }
 
+//    UPDATE 테이블명 SET 열명 = 값, 열명 = 값 WHERE 조건;
     {
         program->add_argument("-d", "--delete")
             .help("Delete Data")
