@@ -24,23 +24,21 @@ namespace queryparse
 
     protected:
         virtual void OnInitialize() { /* Implement in subclass */ }
+        virtual void printOutput(std::shared_ptr<argparse::ArgumentParser> program);
 
     private:
         // main
         void queryAPI();
         void Initialize();
 
-        // Inputter (make argc, argv)
-
         // make arg parser
         std::shared_ptr<argparse::ArgumentParser> makeArgumentParser(const int& argc, char **dpArgv);
         void addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
         void addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
 
-        // start end callback
+        // start end queryAPI callback
         void startQueryAPI();
         void endQueryAPI(std::shared_ptr<argparse::ArgumentParser> program, const int& argc, char **dpArgv);
-        void printOutput(std::shared_ptr<argparse::ArgumentParser> program);
 
     private:
         std::thread m_runnerThread;

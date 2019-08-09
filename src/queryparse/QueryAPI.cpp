@@ -87,55 +87,59 @@ std::shared_ptr<argparse::ArgumentParser> queryparse::QueryAPI::makeArgumentPars
 void queryparse::QueryAPI::addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& dpArgv)
 {
     program->add_argument("input_query")
-        .help("input query")
+        .help("[Data] [Tabel]")
+        .nargs(2)
         .action([](const std::string& value)
             {
-                return std::stoi(value);
+                return StringConverter::string2wstring(value);
+            });
+
+    program->add_argument("input_query")
+        .help("[Data] [Tabel] [?]")
+        .nargs(3)
+        .action([](const std::string& value)
+            {
+                return StringConverter::string2wstring(value);
+            });
+
+    program->add_argument("input_query")
+        .help("[Data] [Tabel]  [?]  [?]")
+        .nargs(3)
+        .action([](const std::string& value)
+            {
+                return StringConverter::string2wstring(value);
             });
 }
 
 void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc)
 {
-    // 1.
     {
-        // use std::stoi
-        program->add_argument("--square")
-            .help("display the square of a given integer")
+        program->add_argument("-c", "--create")
+            .help("Create Data")
             .default_value(false)
             .implicit_value(true);
-        program->add_argument("-s", "--square");
     }
 
-    // 2.
     {
-        // use std::stoi
-        program->add_argument("--integer")
-            .help("Input number")
-            .default_value(false)
-            .implicit_value(true);
-        program->add_argument("-i", "--square");
-    }
-
-    // 3.
-    {
-        // use std::stof
-        program->add_argument("--floats")
-            .help("Vector of floats")
+        program->add_argument("-r", "--read")
+            .help("Read Data")
             .default_value(false)
             .implicit_value(true)
             .nargs(argc);
-        program->add_argument("-f", "--square");
     }
 
-    // 4.
     {
-        // use std::stod
-        program->add_argument("--query_point")
-            .help("3D query point")
+        program->add_argument("-u", "--update")
+            .help("Update Data")
             .default_value(false)
-            .implicit_value(true)
-            .nargs(3);
-        program->add_argument("-q", "--square");
+            .implicit_value(true);
+    }
+
+    {
+        program->add_argument("-d", "--delete")
+            .help("Delete Data")
+            .default_value(false)
+            .implicit_value(true);
     }
 }
 
@@ -158,26 +162,30 @@ void queryparse::QueryAPI::printOutput(std::shared_ptr<argparse::ArgumentParser>
 {
     try
     {
-        if ((*program)["--square"] == true)
-        {
-            auto input = program->get<int>("input_query");
-            m_printer->print(std::to_wstring(input * input));
-        }
-        else if ((*program)["--integer"] == true)
-        {
+        // Get Spilted Query
+        auto spiltedQuery = program->get<std::vector<std::wstring>>("input_query");
 
-        }
-        else if ((*program)["--floats"] == true)
-        {
+        // Check Option (enable -sifq Option All)
+        auto createOption = program->get<bool>("--create");
+        auto readOption = program->get<bool>("--read");
+        auto updateOption = program->get<bool>("--update");
+        auto deleteOption = program->get<bool>("--delete");
 
-        }
-        else if ((*program)["--query_point"] == true)
+        if (createOption)
         {
-
+            int a = 3;
         }
-        else
+        if (readOption)
         {
-            // maybe --help
+            int a = 3;
+        }
+        if (updateOption)
+        {
+            int a = 3;
+        }
+        if (deleteOption)
+        {
+            int a = 3;
         }
     }
     catch (const std::exception& err)

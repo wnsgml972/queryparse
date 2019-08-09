@@ -5,35 +5,48 @@
 std::tuple<int, char**> queryparse::BaseInputter::makeArgcArgv(const std::wstring& programName)
 {
     const auto& input = inputString();
-    const auto& [argc, spiltedInputStrings] = getArgcSpiltedInputStrings(input, programName);
+    const auto& [argc, argv] = getArgcArgvByInputString(input, programName);
 
-    auto dpArgv = makeArgv(argc, spiltedInputStrings);
+    char** dpArgv = makeArgv(argc, argv);
 
     return { argc, dpArgv };
 }
 
-std::tuple<int, std::vector<std::wstring>> queryparse::BaseInputter::getArgcSpiltedInputStrings(const std::wstring& str, const std::wstring& programName)
+std::vector<std::wstring> queryparse::BaseInputter::getSpiltedInputStrings(const std::wstring& str)
 {
     std::vector<std::wstring> spiltedInputStrings;
+
+    std::wstringstream sStream(str);
+    std::wstring item;
+    std::wstring delimiterChar(L" ");
+
+    while (std::getline(sStream, item, delimiterChar.c_str()[0]))
+    {
+        spiltedInputStrings.push_back(item);
+    }
+    return spiltedInputStrings;
+}
+
+std::tuple<int, std::vector<std::wstring>> queryparse::BaseInputter::getArgcArgvByInputString(const std::wstring& str, const std::wstring& programName)
+{
+    std::vector<std::wstring> argv;
     
     // 1. Add Program Name
     {
-        spiltedInputStrings.push_back(programName);
+        argv.push_back(programName);
     }
 
     // 2. Spilt String
     {
-        std::wstringstream sStream(str);
-        std::wstring item;
-        std::wstring delimiterChar(L" ");
+        const auto& spiltedInputStrings = getSpiltedInputStrings(str);
 
-        while (std::getline(sStream, item, delimiterChar.c_str()[0])) 
+        for (auto spiltedInputString : spiltedInputStrings)
         {
-            spiltedInputStrings.push_back(item);
+            argv.push_back(spiltedInputString);
         }
     }
 
-    return { spiltedInputStrings.size(), spiltedInputStrings };
+    return { argv.size(), argv };
 }
 
 char** queryparse::BaseInputter::makeArgv(int count, ...)
