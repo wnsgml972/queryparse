@@ -11,9 +11,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="App\main">
-      <UniqueIdentifier>{bff8b3d7-d4c9-4da2-ac6c-9f8eadeff062}</UniqueIdentifier>
-    </Filter>
     <Filter Include="App\QueryAPI">
       <UniqueIdentifier>{4f822d62-19b1-4cd0-9d1c-125aa81993e1}</UniqueIdentifier>
     </Filter>
@@ -45,10 +42,13 @@
     <Filter Include="App\Printer\Implement">
       <UniqueIdentifier>{ddf8e463-c20c-430b-9086-379136846282}</UniqueIdentifier>
     </Filter>
+    <Filter Include="App\Main">
+      <UniqueIdentifier>{bff8b3d7-d4c9-4da2-ac6c-9f8eadeff062}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>App\main</Filter>
+      <Filter>App\Main</Filter>
     </ClCompile>
     <ClCompile Include="QueryAPI.cpp">
       <Filter>App\QueryAPI\Base</Filter>

@@ -9,10 +9,10 @@ namespace queryparse
     class ConsoleInputter : public BaseInputter
     {
     public:
-        virtual std::wstring inputString() override;
-
-    public:
         ConsoleInputter() = default;
         virtual ~ConsoleInputter() = default;
+
+    public:
+        virtual std::wstring inputString() override;
     };
 }

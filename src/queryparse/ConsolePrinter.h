@@ -11,6 +11,5 @@ namespace queryparse
 
     private:
         virtual void messageOut(const std::wstring& str) override;
-        void printBySTDConsold(const std::wstring& str);
     };
 }
