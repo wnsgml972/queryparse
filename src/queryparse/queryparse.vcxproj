@@ -123,6 +123,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ConsolePrinter.cpp" />
     <ClCompile Include="QueryAPI.cpp" />
+    <ClCompile Include="QueryParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\argparse.hpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="ConsolePrinter.h" />
     <ClInclude Include="QueryAPI.h" />
+    <ClInclude Include="QueryParser.h" />
     <ClInclude Include="StringConverter.hpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,28 +1,20 @@
-
 #include "QueryAPI.h"
 #include "argparse.hpp"
-#include "ConsolePrinter.h"
-#include "ConsoleInputter.h"
-
-// static initialize
-std::unique_ptr<queryparse::QueryAPI> queryparse::QueryAPI::m_instance = {};
-std::once_flag queryparse::QueryAPI::m_onceFlag = {};
-
-
-queryparse::QueryAPI* queryparse::QueryAPI::GetInstance()
-{
-    std::call_once(queryparse::QueryAPI::m_onceFlag, [&]() {
-            m_instance.reset(new queryparse::QueryAPI());
-        });
-
-
-    return m_instance.get();
-}
+#include "BaseInputter.h"
+#include "BasePrinter.h"
 
 void queryparse::QueryAPI::runQueryAPI()
 {
     using namespace std::literals;
+
     Initialize();
+
+    if (!m_isSetPrinter || !m_isSetInputter)
+    {
+        // Set Inpuuter And Printer
+        assert(0);
+        return;
+    }
 
     m_runnerThread = std::thread([&]()
     {
@@ -68,37 +60,52 @@ void queryparse::QueryAPI::queryAPI()
 
 void queryparse::QueryAPI::Initialize()
 {
-    OnInitialize();
+    m_isSetInputter = false;
+    m_isSetPrinter = false;
 
-    m_inputter = std::make_shared<queryparse::ConsoleInputter>();
-    m_printer = std::make_shared<queryparse::ConsolePrinter>();
+    OnInitialize();
+}
+
+void queryparse::QueryAPI::setInputter(std::shared_ptr<BaseInputter> inputter)
+{
+    m_inputter = inputter;
+    if (m_inputter)
+        m_isSetInputter = true;
+}
+
+void queryparse::QueryAPI::setPrinter(std::shared_ptr<BasePrinter> printer)
+{
+    m_printer = printer;
+    if (m_printer)
+        m_isSetPrinter = true;
 }
 
 std::shared_ptr<argparse::ArgumentParser> queryparse::QueryAPI::makeArgumentParser(const int& argc, char **dpArgv)
 {
     std::shared_ptr<argparse::ArgumentParser> program = std::make_shared<argparse::ArgumentParser>("queryparse");
 
-    addPositionalArguments(program, argc);
-    addOptionalArguments(program);
+    addDefaultPositionalArguments(program, argc);
+    addDefaultOptionalArguments(program);
 
     return program;
 }
 
-void queryparse::QueryAPI::addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc)
+void queryparse::QueryAPI::addDefaultPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc)
 {
+    int queryCountExceptProgramNameAndOption = argc - 2;
+
     program->add_argument("input_query")
         .help("[Data] [Tabel]")
-        .nargs(argc - 2)
+        .nargs(queryCountExceptProgramNameAndOption)
         .action([](const std::string& value)
             {
                 return StringConverter::string2wstring(value);
             });
 }
 
-void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program)
+void queryparse::QueryAPI::addDefaultOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program)
 {
 
-    //  INSERT INTO 테이블명 (열1, 열2) VALUES (값1, 값2);
     {
         program->add_argument("-c", "--create")
             .help("Create Data")
@@ -106,7 +113,6 @@ void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::Argume
             .implicit_value(true);
     }
 
-    // SELECT 열이름 FROM 테이블명;
     {
         program->add_argument("-r", "--read")
             .help("Read Data")
@@ -114,7 +120,6 @@ void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::Argume
             .implicit_value(true);
     }
 
-//  DELETE FROM 테이블명 WHERE 조건;
     {
         program->add_argument("-u", "--update")
             .help("Update Data")
@@ -122,13 +127,14 @@ void queryparse::QueryAPI::addOptionalArguments(std::shared_ptr<argparse::Argume
             .implicit_value(true);
     }
 
-//    UPDATE 테이블명 SET 열명 = 값, 열명 = 값 WHERE 조건;
     {
         program->add_argument("-d", "--delete")
             .help("Delete Data")
             .default_value(false)
             .implicit_value(true);
     }
+
+    addCustomOptionalArguments(program);
 }
 
 
@@ -161,18 +167,27 @@ void queryparse::QueryAPI::printOutput(std::shared_ptr<argparse::ArgumentParser>
 
         if (createOption)
         {
+            // INSERT INTO 테이블명 (열1, 열2) VALUES (값1, 값2);
+
+            // insert into [tabel] values [tabel-key, tabel-key, tabel-key]
             int a = 3;
         }
         if (readOption)
         {
+            // SELECT 열이름 FROM 테이블명;
+
+            // select [*] from [tabel]
             int a = 3;
         }
         if (updateOption)
         {
+            // DELETE FROM 테이블명 WHERE 조건;
             int a = 3;
         }
         if (deleteOption)
         {
+            // UPDATE 테이블명 SET 열명 = 값, 열명 = 값 WHERE 조건;
+
             int a = 3;
         }
     }
@@ -180,4 +195,6 @@ void queryparse::QueryAPI::printOutput(std::shared_ptr<argparse::ArgumentParser>
     {
         m_printer->print(err.what());
     }
+
+    addCustomPrintOutput(program);
 }

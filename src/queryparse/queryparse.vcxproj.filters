@@ -27,25 +27,46 @@
     <Filter Include="App\Inputter">
       <UniqueIdentifier>{a6846c79-bac7-44c6-9b94-f5281444daa6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="App\QueryAPI\Base">
+      <UniqueIdentifier>{3a2e686d-5c9b-47c6-9205-aeb764171445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App\QueryAPI\Implement">
+      <UniqueIdentifier>{9b9f83c3-03fc-4ef0-a306-8dd3a0360aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App\Inputter\Base">
+      <UniqueIdentifier>{da9eccd3-ffb2-4314-91ec-6a65548e2eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App\Printer\Base">
+      <UniqueIdentifier>{cafcf106-5610-48c5-9442-062f54b81eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App\Inputter\Implement">
+      <UniqueIdentifier>{1251316b-df68-43e3-b775-4550f83b5296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App\Printer\Implement">
+      <UniqueIdentifier>{ddf8e463-c20c-430b-9086-379136846282}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="QueryAPI.cpp">
-      <Filter>App\QueryAPI</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>App\main</Filter>
     </ClCompile>
-    <ClCompile Include="BasePrinter.cpp">
-      <Filter>App\Printer</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsolePrinter.cpp">
-      <Filter>App\Printer</Filter>
+    <ClCompile Include="QueryAPI.cpp">
+      <Filter>App\QueryAPI\Base</Filter>
     </ClCompile>
     <ClCompile Include="BaseInputter.cpp">
-      <Filter>App\Inputter</Filter>
+      <Filter>App\Inputter\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BasePrinter.cpp">
+      <Filter>App\Printer\Base</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleInputter.cpp">
-      <Filter>App\Inputter</Filter>
+      <Filter>App\Inputter\Implement</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsolePrinter.cpp">
+      <Filter>App\Printer\Implement</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryParser.cpp">
+      <Filter>App\QueryAPI\Implement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,23 +76,26 @@
     <ClInclude Include="define.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="QueryAPI.h">
-      <Filter>App\QueryAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="BasePrinter.h">
-      <Filter>App\Printer</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsolePrinter.h">
-      <Filter>App\Printer</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseInputter.h">
-      <Filter>App\Inputter</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleInputter.h">
-      <Filter>App\Inputter</Filter>
-    </ClInclude>
     <ClInclude Include="StringConverter.hpp">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryAPI.h">
+      <Filter>App\QueryAPI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseInputter.h">
+      <Filter>App\Inputter\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BasePrinter.h">
+      <Filter>App\Printer\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleInputter.h">
+      <Filter>App\Inputter\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsolePrinter.h">
+      <Filter>App\Printer\Implement</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryParser.h">
+      <Filter>App\QueryAPI\Implement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

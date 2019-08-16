@@ -1,10 +1,11 @@
 #include "define.h"
-#include "QueryAPI.h"
+#include "QueryParser.h"
 
 // main app start
 int main()
 {
-    queryparse::QueryAPI::GetInstance()->runQueryAPI();
+    std::unique_ptr<queryparse::QueryParser> queryparser = std::make_unique<queryparse::QueryParser>();
+    queryparser->runQueryAPI();
 
     system("pause");
 

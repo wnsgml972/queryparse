@@ -9,22 +9,26 @@ namespace argparse
 
 namespace queryparse
 {
-    class ConsoleInputter;
-    class ConsolePrinter;
+    class BaseInputter;
+    class BasePrinter;
 
     // thread safe singleton
     class QueryAPI
     {
     public:
-        // instance
-        static QueryAPI* GetInstance();
+        QueryAPI() = default;
+        virtual ~QueryAPI() = default;
 
         // run API
         void runQueryAPI();
 
     protected:
-        virtual void OnInitialize() { /* Implement in subclass */ }
-        virtual void printOutput(std::shared_ptr<argparse::ArgumentParser> program);
+        virtual void OnInitialize() = 0;
+        virtual void addCustomOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program) { /* Implement in subclass */ }
+        virtual void addCustomPrintOutput(std::shared_ptr<argparse::ArgumentParser> program) { /* Implement in subclass */ }
+
+        void setInputter(std::shared_ptr<BaseInputter> inputter);
+        void setPrinter(std::shared_ptr<BasePrinter> printer);
 
     private:
         // main
@@ -33,24 +37,19 @@ namespace queryparse
 
         // make arg parser
         std::shared_ptr<argparse::ArgumentParser> makeArgumentParser(const int& argc, char **dpArgv);
-        void addPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
-        void addOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program);
+        void addDefaultPositionalArguments(std::shared_ptr<argparse::ArgumentParser> program, const int& argc);
+        void addDefaultOptionalArguments(std::shared_ptr<argparse::ArgumentParser> program);
 
         // start end queryAPI callback
         void startQueryAPI();
         void endQueryAPI(std::shared_ptr<argparse::ArgumentParser> program, const int& argc, char **dpArgv);
+        void printOutput(std::shared_ptr<argparse::ArgumentParser> program);
 
     private:
         std::thread m_runnerThread;
-        std::shared_ptr<ConsoleInputter> m_inputter;
-        std::shared_ptr<ConsolePrinter> m_printer;
-
-        //////////////////////////////////////////////////////////////////////////
-        static std::unique_ptr<QueryAPI> m_instance;
-        static std::once_flag m_onceFlag;
-
-        QueryAPI() = default;
-        QueryAPI(const QueryAPI &) = delete;
-        QueryAPI &operator=(const QueryAPI &) = delete;
+        std::shared_ptr<BaseInputter> m_inputter;
+        std::shared_ptr<BasePrinter> m_printer;
+        bool m_isSetInputter;
+        bool m_isSetPrinter;
     };
 }
