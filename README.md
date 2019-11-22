@@ -1,7 +1,6 @@
 # queryparse
 
 ## Highlights
-* Single header file
 * Requires C++17
 * MIT License
 
